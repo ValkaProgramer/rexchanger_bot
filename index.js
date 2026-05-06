@@ -4,8 +4,20 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const cron = require('node-cron');
 const { Telegraf } = require('telegraf');
+const express = require('express');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
+app.get('/', (req, res) => {
+  res.send('Bot is alive');
+});
+
+app.listen(PORT, () => {
+  console.log('Server running on port', PORT);
+});
 
 async function getRates() {
     const rates = {}
